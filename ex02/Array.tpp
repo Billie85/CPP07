@@ -1,27 +1,52 @@
 #include "Array.hpp"
 
+//=======constructor and destructor=======
+//コンストラクタは3種類ある。
+
 template<typename T>
 Array<T>::Array()
 {
+	//std::cout << "default constructor called" << std::endl;
 	this->_array = NULL;
 }
 
 template<typename T>
 Array<T>::Array(unsigned int n)
 {
+	//std::cout << "unsigned int constructor called" << std::endl;
 	this->len = n;
 	this->_array = new T[n];
 }
 
 template<typename T>
+Array<T>::Array(const Array &original)
+{
+	//std::cout << "copy constructor called" << std::endl;
+	this->_array = NULL;
+	*this=original;	
+}
+
+template<typename T>
 Array<T>::~Array()
 {
+	//std::cout << "Destroyed" << std::endl;
 	delete[] this->_array;
 }
 
-Array &operator=(const Array &original)
+//======function=======
+template<typename T>
+size_t Array<T>::size() const
 {
-	//ディープコピーアドレスは違う先の値は同じ
+	//std::cout << "Size function called" << std::endl;
+	return(this->len);
+}
+
+//======operator=========
+template<typename T>
+Array<T> &Array<T>::operator=(const Array &original)
+{
+	//std::cout << "operator= called" << std::endl;
+	//ディープコピーアドレスは違う,先の値は同じ
 	if (this->_array != NULL)
 	{
 		delete[] this->_array;
@@ -30,43 +55,17 @@ Array &operator=(const Array &original)
 	this->len = original.len;//シャドーコピーにする理由はlenは変わる事ないから。lenだけシャドーコピー
 	for (size_t i = 0; i < original.len; i++)
 	{
-		this->_array[i] = original.array[i];//オリジナルの配列から、コピーしたい値の情報を収取する。
+		this->_array[i] = original._array[i];
+		//オリジナルの配列から、コピーしたい値の情報を収取する。
 	}
-	//コピー先　
+	return (*this);
 }
 
 template<typename T>
-Array<T>::Array(const Array &original)
+T &Array<T>::operator[](size_t i)
 {
-	this->_array = NULL;
-	*this=original;	
+	//std::cout << "operator[] called" << std::endl;
+	if (i > this->len)
+		throw (std::exception());
+	return(this->_array[i]);
 }
-
-
-
-
-
-
-//c++
-/* 
-var = new Type()); 
- */
-
-//c
-/* 
-var = malloc(sizeof(Type)); 
-Type_init_defalt(var);
- */
-
-
-//c++
-// var = new Type[5];
-
-//c
-/* 
-var = malloc(sizeof(Type) * 5);
-for (size_t i = 0; i < 5; i++)
-{
-	Type_init_defalt(var + i);
-}
- */
