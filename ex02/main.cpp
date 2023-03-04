@@ -1,57 +1,7 @@
 #include "Array.hpp"
-#include "Fixed.hpp"
-
-
-int main()
-{
-    std::cout << "==========Test Fixed==========" << std::endl;
-
-    Array<Fixed> Fixedarray(5);
-    for (size_t i = 0; i < Fixedarray.size(); i++)
-    {
-        //最初にキャストしてから、Fixedの引数がintのコンストラクタに渡される。
-        //そしたら両辺がFixed型のものになるから、上手くいく。
-        Fixedarray[i] = Fixed(static_cast<int>(i));
-        std::cout << Fixedarray[i] << std::endl;
-    }
-
-    std::cout << "==========Test Int==========" << std::endl;
-
-    Array<int> intarray(5);
-    for (size_t i = 0; i < intarray.size(); i++)
-    {
-        intarray[i] = i;
-        std::cout << intarray[i] << std::endl;
-    }
-
-    std::cout << "==========Test char==========" << std::endl;
-     Array<char> chararray(5);
-    for (size_t i = 0; i < chararray.size(); i++)
-    {
-         chararray[i] = 'a' + static_cast<char>(i);
-        std::cout << chararray[i] << std::endl;
-    }
-
-    std::cout << "==========Test double==========" << std::endl;
-     Array<double> doublearray(5);
-    for (size_t i = 0; i < doublearray.size(); i++)
-    {
-         doublearray[i] = i;
-        std::cout << doublearray[i] << std::endl;
-    }
-
-    std::cout << "==========Test float==========" << std::endl;
-     Array<float> floatarray(5);
-    for (size_t i = 0; i < floatarray.size(); i++)
-    {
-         floatarray[i] = i;
-        std::cout << floatarray[i] << std::endl;
-    }
-}
-
-
-//公式のmainを使ってしまうとabordしてしまう。
-/*  #include "Array.hpp"
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
 
 #define MAX_VAL 750
 int main(int, char**)
@@ -102,4 +52,4 @@ int main(int, char**)
     }
     delete [] mirror;//
     return 0;
-} */
+}
