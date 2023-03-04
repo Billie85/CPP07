@@ -13,11 +13,12 @@
 3つ目のパラメータは、配列の各要素に適用される関数です。この関数は、配列の各要素に対して呼び出されます。 */
 
 template<typename T>
-void iter(T *array, size_t len, void (*func) (T &))
+
+void iter(T *array, size_t len, void (*func)(T &))
 {
 	for (size_t i = 0; i < len; i++)
 	{
-		func(array[i]);
+		func((array[i]));
 	}
 	
 }
